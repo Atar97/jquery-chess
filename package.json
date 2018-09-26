@@ -1,0 +1,18 @@
+{
+  "name": "js-chess",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode=development",
+    "watch": "webpack --watch ./src/js/main.js -o ./dist/bundle.js --mode=development"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1"
+  }
+}
