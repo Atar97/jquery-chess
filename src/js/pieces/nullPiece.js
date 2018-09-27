@@ -1,11 +1,10 @@
 const Piece = require('./piece.js');
 
 class NullPiece extends Piece {
-  constructor(pos) {
-    this.color = null;
+  constructor() {
+    super();
     this.sym = ' ';
     this.str = ' ';
-    this.pos = pos;
   }
 }
 

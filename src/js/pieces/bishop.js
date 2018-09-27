@@ -4,7 +4,7 @@ class Bishop extends Piece {
   constructor(color, pos) {
     super(color, pos);
     this.sym = 'B';
-    this.str = '&#9815;';
+    this.str = '&#9821;';
   }
 }
 

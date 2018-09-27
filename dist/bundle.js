@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Bishop =  __webpack_require__(/*! ./pieces/bishop.js */ \"./src/js/pieces/bishop.js\");\nconst King = __webpack_require__(/*! ./pieces/king.js */ \"./src/js/pieces/king.js\");\nconst Knight = __webpack_require__(/*! ./pieces/knight.js */ \"./src/js/pieces/knight.js\");\nconst Pawn = __webpack_require__(/*! ./pieces/pawn.js */ \"./src/js/pieces/pawn.js\");\nconst Queen = __webpack_require__(/*! ./pieces/queen.js */ \"./src/js/pieces/queen.js\");\nconst Rook = __webpack_require__(/*! ./pieces/Rook.js */ \"./src/js/pieces/Rook.js\");\nconst NullPiece = __webpack_require__(/*! ./pieces/nullPiece.js */ \"./src/js/pieces/nullPiece.js\");\n\nclass Board {\n  constructor() {\n    this.POWERPIECES = [Rook, Knight, Bishop, Queen,\n      King, Bishop, Knight, Rook];\n    this.board = [];\n    for (let i = 0; i < 8; i++) {\n      this.board.push([]);\n    }\n    this.buildBoard();\n  }\n\n  buildBoard() {\n    for (let i = 0; i < 8; i++) {\n      this.board[0][i] = new this.POWERPIECES[i]('white', [0,i]);\n      this.board[1][i] = new Pawn('white', [0,i]);\n      this.board[6][i] = new this.POWERPIECES[i]('black', [0,i]);\n      this.board[7][i] = new Pawn('black', [0,i]);\n      for (k = 2; k < 6; k++) {\n        this.board[k][i] = new NullPiece([k,i]);\n      }\n    }\n  }\n}\n\nmodule.exports = Board;\n\n\n//# sourceURL=webpack:///./src/js/board.js?");
+eval("const Bishop =  __webpack_require__(/*! ./pieces/bishop.js */ \"./src/js/pieces/bishop.js\");\nconst King = __webpack_require__(/*! ./pieces/king.js */ \"./src/js/pieces/king.js\");\nconst Knight = __webpack_require__(/*! ./pieces/knight.js */ \"./src/js/pieces/knight.js\");\nconst Pawn = __webpack_require__(/*! ./pieces/pawn.js */ \"./src/js/pieces/pawn.js\");\nconst Queen = __webpack_require__(/*! ./pieces/queen.js */ \"./src/js/pieces/queen.js\");\nconst Rook = __webpack_require__(/*! ./pieces/Rook.js */ \"./src/js/pieces/Rook.js\");\nconst NullPiece = __webpack_require__(/*! ./pieces/nullPiece.js */ \"./src/js/pieces/nullPiece.js\");\n\nclass Board {\n  constructor() {\n    this.POWERPIECES = [Rook, Knight, Bishop, Queen,\n      King, Bishop, Knight, Rook];\n    this.sentinal = new NullPiece();\n    this.board = [];\n    for (let i = 0; i < 8; i++) {\n      this.board.push([]);\n    }\n    this.buildBoard();\n  }\n\n  buildBoard() {\n    for (let i = 0; i < 8; i++) {\n      this.board[0][i] = new this.POWERPIECES[i]('white', [0,i]);\n      this.board[1][i] = new Pawn('white', [0,i]);\n      this.board[6][i] = new Pawn('black', [0,i]);\n      this.board[7][i] = new this.POWERPIECES[i]('black', [0,i]);\n      for (let k = 2; k < 6; k++) {\n        this.board[k][i] = this.sentinal;\n      }\n    }\n  }\n\n  movePiece(oldPos, newPos) {\n    const piece = this.getPiece(oldPos);\n    this.setPiece(oldPos, this.sentinal);\n    this.setPiece(newPos, piece);\n    return piece;\n  }\n\n  getPiece(pos) {\n    return this.board[pos[0]][pos[1]];\n  }\n\n  setPiece(pos, piece) {\n    this.board[pos[0]][pos[1]] = piece;\n  }\n}\n\nmodule.exports = Board;\n\n\n//# sourceURL=webpack:///./src/js/board.js?");
 
 /***/ }),
 
@@ -104,7 +104,7 @@ eval("const Bishop =  __webpack_require__(/*! ./pieces/bishop.js */ \"./src/js/p
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Board = __webpack_require__(/*! ./board.js */ \"./src/js/board.js\");\n\nclass Game {\n  constructor() {\n    this.board = new Board();\n  }\n}\n\nmodule.exports = Game;\n\n\n//# sourceURL=webpack:///./src/js/game.js?");
+eval("const Board = __webpack_require__(/*! ./board.js */ \"./src/js/board.js\");\n\nclass Game {\n  constructor() {\n    this.board = new Board();\n  }\n\n  getPiece(pos) {\n    return this.board.getPiece(pos);\n  }\n\n  movePiece(oldPos, newPos) {\n    this.board.movePiece(oldPos, newPos);\n  }\n\n  \n}\n\nmodule.exports = Game;\n\n\n//# sourceURL=webpack:///./src/js/game.js?");
 
 /***/ }),
 
@@ -115,7 +115,7 @@ eval("const Board = __webpack_require__(/*! ./board.js */ \"./src/js/board.js\")
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const View = __webpack_require__(/*! ./view.js */ \"./src/js/view.js\");\nconst Game = __webpack_require__(/*! ./game.js */ \"./src/js/game.js\");\n\n$(() => {\n  const $mainContainer = $('.board-container');\n  new View(new Game(), $mainContainer);\n});\n\n\n//# sourceURL=webpack:///./src/js/main.js?");
+eval("const View = __webpack_require__(/*! ./view.js */ \"./src/js/view.js\");\nconst Game = __webpack_require__(/*! ./game.js */ \"./src/js/game.js\");\n\n$(() => {\n  const $mainContainer = $('.board-container');\n  const game = new Game();\n  const view = new View(game, $mainContainer);\n  view.render();\n  setTimeout(() => {\n    game.movePiece([0,0], [4,4]);\n    view.render();\n  }, 2000);\n});\n\n\n//# sourceURL=webpack:///./src/js/main.js?");
 
 /***/ }),
 
@@ -126,7 +126,7 @@ eval("const View = __webpack_require__(/*! ./view.js */ \"./src/js/view.js\");\n
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Piece = __webpack_require__(/*! ./piece.js */ \"./src/js/pieces/piece.js\");\n\nclass Rook extends Piece {\n  constructor(color, pos) {\n    super(color, pos);\n    this.sym = 'R';\n    this.str = '&#9814';\n  }\n}\n\nmodule.exports = Rook;\n\n\n//# sourceURL=webpack:///./src/js/pieces/Rook.js?");
+eval("const Piece = __webpack_require__(/*! ./piece.js */ \"./src/js/pieces/piece.js\");\n\nclass Rook extends Piece {\n  constructor(color, pos) {\n    super(color, pos);\n    this.sym = 'R';\n    this.str = '&#9820';\n  }\n}\n\nmodule.exports = Rook;\n\n\n//# sourceURL=webpack:///./src/js/pieces/Rook.js?");
 
 /***/ }),
 
@@ -137,7 +137,7 @@ eval("const Piece = __webpack_require__(/*! ./piece.js */ \"./src/js/pieces/piec
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Piece = __webpack_require__(/*! ./piece.js */ \"./src/js/pieces/piece.js\");\n\nclass Bishop extends Piece {\n  constructor(color, pos) {\n    super(color, pos);\n    this.sym = 'B';\n    this.str = '&#9815;';\n  }\n}\n\nmodule.exports = Bishop;\n\n\n//# sourceURL=webpack:///./src/js/pieces/bishop.js?");
+eval("const Piece = __webpack_require__(/*! ./piece.js */ \"./src/js/pieces/piece.js\");\n\nclass Bishop extends Piece {\n  constructor(color, pos) {\n    super(color, pos);\n    this.sym = 'B';\n    this.str = '&#9821;';\n  }\n}\n\nmodule.exports = Bishop;\n\n\n//# sourceURL=webpack:///./src/js/pieces/bishop.js?");
 
 /***/ }),
 
@@ -148,7 +148,7 @@ eval("const Piece = __webpack_require__(/*! ./piece.js */ \"./src/js/pieces/piec
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Piece = __webpack_require__(/*! ./piece.js */ \"./src/js/pieces/piece.js\");\nclass King extends Piece {\n  constructor(color, pos) {\n    super(color, pos);\n    this.sym = 'R';\n    this.str = '&#9812;';\n  }\n}\n\nmodule.exports = King;\n\n\n//# sourceURL=webpack:///./src/js/pieces/king.js?");
+eval("const Piece = __webpack_require__(/*! ./piece.js */ \"./src/js/pieces/piece.js\");\nclass King extends Piece {\n  constructor(color, pos) {\n    super(color, pos);\n    this.sym = 'R';\n    this.str = '&#9818;';\n  }\n}\n\nmodule.exports = King;\n\n\n//# sourceURL=webpack:///./src/js/pieces/king.js?");
 
 /***/ }),
 
@@ -159,7 +159,7 @@ eval("const Piece = __webpack_require__(/*! ./piece.js */ \"./src/js/pieces/piec
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Piece = __webpack_require__(/*! ./piece.js */ \"./src/js/pieces/piece.js\");\nclass Knight extends Piece {\n  constructor(color, pos) {\n    super(color, pos);\n    this.sym = 'N';\n    this.str = '&#9816;';\n  }\n}\n\nmodule.exports = Knight;\n\n\n//# sourceURL=webpack:///./src/js/pieces/knight.js?");
+eval("const Piece = __webpack_require__(/*! ./piece.js */ \"./src/js/pieces/piece.js\");\nclass Knight extends Piece {\n  constructor(color, pos) {\n    super(color, pos);\n    this.sym = 'N';\n    this.str = '&#9822;';\n  }\n}\n\nmodule.exports = Knight;\n\n\n//# sourceURL=webpack:///./src/js/pieces/knight.js?");
 
 /***/ }),
 
@@ -170,7 +170,7 @@ eval("const Piece = __webpack_require__(/*! ./piece.js */ \"./src/js/pieces/piec
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Piece = __webpack_require__(/*! ./piece.js */ \"./src/js/pieces/piece.js\");\n\nclass NullPiece extends Piece {\n  constructor(pos) {\n    this.color = null;\n    this.sym = ' ';\n    this.str = ' ';\n    this.pos = pos;\n  }\n}\n\nmodule.exports = NullPiece;\n\n\n//# sourceURL=webpack:///./src/js/pieces/nullPiece.js?");
+eval("const Piece = __webpack_require__(/*! ./piece.js */ \"./src/js/pieces/piece.js\");\n\nclass NullPiece extends Piece {\n  constructor() {\n    super();\n    this.sym = ' ';\n    this.str = ' ';\n  }\n}\n\nmodule.exports = NullPiece;\n\n\n//# sourceURL=webpack:///./src/js/pieces/nullPiece.js?");
 
 /***/ }),
 
@@ -181,7 +181,7 @@ eval("const Piece = __webpack_require__(/*! ./piece.js */ \"./src/js/pieces/piec
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Piece = __webpack_require__(/*! ./piece.js */ \"./src/js/pieces/piece.js\");\nclass Pawn extends Piece {\n  constructor(color, pos) {\n    super(color, pos);\n    this.sym = 'p';\n    this.str = '&#9817;';\n  }\n}\n\nmodule.exports = Pawn;\n\n\n//# sourceURL=webpack:///./src/js/pieces/pawn.js?");
+eval("const Piece = __webpack_require__(/*! ./piece.js */ \"./src/js/pieces/piece.js\");\nclass Pawn extends Piece {\n  constructor(color, pos) {\n    super(color, pos);\n    this.sym = 'p';\n    this.str = '&#9823;';\n  }\n}\n\nmodule.exports = Pawn;\n\n\n//# sourceURL=webpack:///./src/js/pieces/pawn.js?");
 
 /***/ }),
 
@@ -203,7 +203,7 @@ eval("\nclass Piece {\n  constructor(color, pos) {\n    this.color = color;\n   
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Piece = __webpack_require__(/*! ./piece.js */ \"./src/js/pieces/piece.js\");\n\nclass Queen extends Piece {\n  constructor(color, pos) {\n    super(color, pos);\n    this.sym = 'R';\n    this.str = '&#9813;';\n  }\n}\n\nmodule.exports = Queen;\n\n\n//# sourceURL=webpack:///./src/js/pieces/queen.js?");
+eval("const Piece = __webpack_require__(/*! ./piece.js */ \"./src/js/pieces/piece.js\");\n\nclass Queen extends Piece {\n  constructor(color, pos) {\n    super(color, pos);\n    this.sym = 'R';\n    this.str = '&#9819;';\n  }\n}\n\nmodule.exports = Queen;\n\n\n//# sourceURL=webpack:///./src/js/pieces/queen.js?");
 
 /***/ }),
 
@@ -214,7 +214,7 @@ eval("const Piece = __webpack_require__(/*! ./piece.js */ \"./src/js/pieces/piec
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("class View {\n\n  constructor(game, $container) {\n    this.game = game;\n    this.$container = $container;\n    this.buildBoard();\n  }\n\n  buildBoard() {\n    const $board = $('<div class=\"board\"></div>');\n    for (let i = 0; i < 64; i++) {\n      const $square = this.makeSquare(i);\n      $board.append($square);\n    }\n    this.$container.append($board);\n  }\n\n  makeSquare(number) {\n    const $square = $(\"<div class='square'></div>\");\n    const pos = [Math.floor(number / 8), number % 8];\n    $square.data('pos', pos);\n    if (this.whiteSquare(pos)) {\n      $square.addClass('white');\n    } else {\n      $square.addClass('black');\n    }\n    \n    $square.append(`<p></p>`);\n    return $square;\n  }\n\n  whiteSquare(pos) {\n    if (pos[1] % 2 === 0) {\n      if (pos[0] % 2 === 0) {\n        return true;\n      }\n    } else {\n      if (pos[0] % 2 === 1) {\n        return true;\n      }\n    }\n    return false;\n  }\n\n}\n\nmodule.exports = View;\n\n\n//# sourceURL=webpack:///./src/js/view.js?");
+eval("class View {\n\n  constructor(game, $container) {\n    this.game = game;\n    this.$container = $container;\n    this.buildBoard();\n    this.bindSquares();\n  }\n\n  buildBoard() {\n    const $board = $('<div class=\"board\"></div>');\n    for (let i = 0; i < 64; i++) {\n      const $square = this.makeSquare(i);\n      $board.append($square);\n    }\n    this.$container.append($board);\n  }\n\n  makeSquare(number) {\n    const $square = $(\"<div class='square'></div>\");\n    const pos = [Math.floor(number / 8), number % 8];\n    $square.data('pos', pos);\n    if (this.whiteSquare(pos)) {\n      $square.addClass('white-square');\n    } else {\n      $square.addClass('black-square');\n    }\n    // this will actually be called in render not in makeSquare\n    // const piece = this.game.getPiece(pos);\n    // $square.append(`<p class=\"${piece.color}\">${piece.str}</p>`);\n    return $square;\n  }\n\n  bindSquares() {\n    const $squares = $('.square');\n    $squares.each(function(index) {\n      const $square = $(this);\n      $square.on('click', e => {\n        const $clickedSq = $(e.currentTarget);\n        $clickedSq.addClass('selected');\n        $clickedSq.addClass('selected:hover');\n        return $clickedSq.data('pos');\n      });\n    });\n  }\n\n  // this will be called between each move\n  render() {\n    const $squares = $('.square');\n    const game = this.game;\n    $squares.each(function(index) {\n      const $square = $(this);\n      const pos = $square.data('pos');\n      const piece = game.getPiece(pos);\n      $square.children().remove();\n      $square.append(`<p class=\"${piece.color}\">${piece.str}</p>`);\n    });\n  }\n\n  whiteSquare(pos) {\n    if (pos[1] % 2 === 0) {\n      if (pos[0] % 2 === 0) {\n        return true;\n      }\n    } else {\n      if (pos[0] % 2 === 1) {\n        return true;\n      }\n    }\n    return false;\n  }\n\n}\n\nmodule.exports = View;\n\n\n//# sourceURL=webpack:///./src/js/view.js?");
 
 /***/ })
 

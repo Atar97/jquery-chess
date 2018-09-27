@@ -3,5 +3,11 @@ const Game = require('./game.js');
 
 $(() => {
   const $mainContainer = $('.board-container');
-  new View(new Game(), $mainContainer);
+  const game = new Game();
+  const view = new View(game, $mainContainer);
+  view.render();
+  setTimeout(() => {
+    game.movePiece([0,0], [4,4]);
+    view.render();
+  }, 2000);
 });
