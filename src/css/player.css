@@ -1,0 +1,61 @@
+.player {
+  display: flex;
+  flex-direction: column;
+  margin: 100px;
+  padding: 3px;
+  width: 200px;
+  height: 400px;
+  background-color: #6B7290;
+  align-items: center;
+  margin-top: 100px;
+  border-radius: 6px;
+}
+
+.player-header {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.player-header h1 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.player  h3 {
+  font-size: 20px;
+}
+
+
+.timer {
+  display: flex;
+  width: 100px;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px;
+  padding: 30px;
+}
+
+.timer button, h2 {
+  margin: 10px;
+}
+
+.timer h2 {
+  font-size: 30px;
+}
+
+.timer button {
+  width: 100%;
+  background-color: #E2D6A7;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 3px black;
+}
+
+.in-progress {
+  border: 1px solid red;
+}

@@ -7,5 +7,4 @@ const renderView = () => {
   const view = new View(game, $mainContainer);
 };
 
-
 export default renderView;

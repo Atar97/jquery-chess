@@ -14,3 +14,8 @@
   flex-wrap: wrap;
   padding: 0;
 }
+
+.total-container {
+  display: flex;
+  justify-content: center;
+}
