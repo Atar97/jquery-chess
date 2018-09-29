@@ -12,8 +12,6 @@ class Game {
   movePiece(oldPos, newPos) {
     this.board.movePiece(oldPos, newPos);
   }
-
-  
 }
 
 module.exports = Game;

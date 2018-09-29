@@ -3,8 +3,10 @@ class View {
   constructor(game, $container) {
     this.game = game;
     this.$container = $container;
+    this.firstClick = null;
     this.buildBoard();
     this.bindSquares();
+    this.render();
   }
 
   buildBoard() {
@@ -25,21 +27,18 @@ class View {
     } else {
       $square.addClass('black-square');
     }
-    // this will actually be called in render not in makeSquare
-    // const piece = this.game.getPiece(pos);
-    // $square.append(`<p class="${piece.color}">${piece.str}</p>`);
     return $square;
   }
 
   bindSquares() {
     const $squares = $('.square');
+    let boundMove = this.move.bind(this);
     $squares.each(function(index) {
       const $square = $(this);
       $square.on('click', e => {
         const $clickedSq = $(e.currentTarget);
         $clickedSq.addClass('selected');
-        $clickedSq.addClass('selected:hover');
-        return $clickedSq.data('pos');
+        boundMove($clickedSq);
       });
     });
   }
@@ -55,6 +54,20 @@ class View {
       $square.children().remove();
       $square.append(`<p class="${piece.color}">${piece.str}</p>`);
     });
+  }
+
+  move($clickedSq) {
+    if (this.firstClick) {
+      this.game.movePiece(this.firstClick, $clickedSq.data('pos'));
+      this.firstClick = null;
+      debugger;
+      $('.selected').removeClass('selected');
+      this.render();
+      return true;
+    } else {
+      this.firstClick = $clickedSq.data('pos');
+      return false;
+    }
   }
 
   whiteSquare(pos) {
