@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Player from './player';
 class Form extends React.Component {
   constructor(props) {
     super(props);
@@ -9,30 +9,34 @@ class Form extends React.Component {
 
   render() {
     return (
-      <div className='modal-form-container'>
-        <form className='modal-form'  onSubmit={this.submit.bind(this)}>
+      <div>
+        <Player players={this.state} />
+        <div className='modal-form-container'>
+          <form className='modal-form'  onSubmit={this.submit.bind(this)}>
 
-          <label htmlFor='player1'>Player1 Name: </label>
-          <input className='text' onChange={this.storeText}
-            type='text' id='player1'></input>
+            <label htmlFor='player1'>Player1 Name: </label>
+            <input className='text' onChange={this.storeText}
+              type='text' id='player1'></input>
 
-          <label htmlFor='player2'>Player2 Name: </label>
-          <input type='text' className='text'
-            onChange={this.storeText} id='player2'></input>
+            <label htmlFor='player2'>Player2 Name: </label>
+            <input type='text' className='text'
+              onChange={this.storeText} id='player2'></input>
 
-          <input className='button' type='submit'
-            value='GO!' onClick={this.buttonClick.bind(this)}>
-          </input>
+            <input className='button' type='submit'
+              value='GO!' onClick={this.buttonClick.bind(this)}>
+            </input>
 
-          <a href='#' onClick={this.linkClick.bind(this)}>Cancel</a>
-        </form>
+            <a href='#' onClick={this.linkClick.bind(this)}>Cancel</a>
+          </form>
       </div>
+    </div>
     );
   }
 
   buttonClick(event) {
     event.preventDefault();
-    $('.modal').toggleClass('disapear');
+    $('.modal-screen').toggleClass('disapear');
+    $('.modal-form-container').toggleClass('disapear');
   }
 
   submit(e) {
@@ -46,7 +50,8 @@ class Form extends React.Component {
 
   linkClick(event) {
     event.preventDefault();
-    $('.modal').toggleClass('disapear');
+    $('.modal-screen').toggleClass('disapear');
+    $('.modal-form-container').toggleClass('disapear');
     this.setState({
       player1: 'Player1',
       player2: 'Player2'
