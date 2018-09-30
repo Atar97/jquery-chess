@@ -57,7 +57,7 @@ class View {
   }
 
   move($clickedSq) {
-    if (this.firstClick) {
+    if (this.firstClick) {  
       this.game.movePiece(this.firstClick, $clickedSq.data('pos'));
       this.firstClick = null;
       $('.selected').removeClass('selected');

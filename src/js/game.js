@@ -10,7 +10,7 @@ class Game {
   }
 
   movePiece(oldPos, newPos) {
-    this.board.movePiece(oldPos, newPos);
+    this.board.move(oldPos, newPos);
   }
 }
 
