@@ -1,4 +1,3 @@
-
 class Piece {
   constructor(color, pos, board) {
     this.color = color;
@@ -13,6 +12,21 @@ class Piece {
 
   move(newPos) {
     this.pos = newPos;
+  }
+
+  // decides whether to add a pos to the piece's move tree
+  // for slideable pieces returns true or false if the piece should keep sliding
+  addToMoveTree(pos, result) {
+    const piece = this.board.getPiece(pos);
+    if (piece.color === null) {
+      result.push(pos);
+      return true;
+    } else if (piece.color != this.color) {
+      result.push(pos);
+      return false;
+    } else {
+      return false;
+    }
   }
 
 }

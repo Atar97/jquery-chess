@@ -60,7 +60,6 @@ class View {
     if (this.firstClick) {
       this.game.movePiece(this.firstClick, $clickedSq.data('pos'));
       this.firstClick = null;
-      debugger;
       $('.selected').removeClass('selected');
       this.render();
       return true;

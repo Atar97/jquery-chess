@@ -5,7 +5,7 @@ class Timer extends React.Component {
     super(props);
     this.state = {
       timeLeft: parseInt(props.totalTime),
-      buttonText: 'Stop'
+      buttonText: 'Start'
     };
     this.downTick = this.downTick.bind(this);
     this.handle = null;
@@ -22,10 +22,6 @@ class Timer extends React.Component {
 
   downTick() {
     this.setState({timeLeft: this.state.timeLeft - 1});
-  }
-
-  componentWillMount() {
-    this.start();
   }
 
   componentWillUnmount() {

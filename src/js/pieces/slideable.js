@@ -1,34 +1,29 @@
 import Piece from './piece';
+import Board from '../board';
 
 class Slideable extends Piece {
-  constructor(color, pos) {
-    super(color, pos);
+  constructor(color, pos, board) {
+    super(color, pos, board);
     this.ORTHOGONAL = [[1,0], [0,1], [-1, 0], [0, -1]];
     this.DIAGONAL = [[1,1], [1,-1], [-1, 1], [-1, -1]];
   }
 
-  allMoves(newPos) {
+  allMoves() {
     const dirs = this.moveDirs();
-    result = [];
+    const result = [];
+    const that = this;
     dirs.forEach(dir => {
-      let tempPos = [this.pos[0] + dir[0], this.pos[1] + dir[1]];
+      let tempPos = [that.pos[0] + dir[0], that.pos[1] + dir[1]];
       while (Piece.onBoard(tempPos)) {
+        if (!that.addToMoveTree(tempPos, result)) break;
         tempPos = [tempPos[0] + dir[0], tempPos[1] + dir[1]];
-        const piece = this.board.getPiece(tempPos);
-        if (piece.color === null) {
-          result.push(tempPos);
-        } else if (piece.color != this.color) {
-          result.push(tempPos);
-          break;
-        } else {
-          break;
-        }
       }
     });
+    return result;
   }
 
   moveDirs() {
-    return this.ORTHOGONAL;
+    return this.DIAGONAL.concat(this.ORTHOGONAL);
   }
 
 }
