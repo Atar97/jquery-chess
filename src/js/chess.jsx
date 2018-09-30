@@ -10,12 +10,7 @@ $(() => {
 
   ReactDom.render(
     <Player />,
-      document.getElementById('player1')
-  );
-
-  ReactDom.render(
-    <Player />,
-    document.getElementById('player2')
+      document.getElementById('players')
   );
 
   ReactDom.render(

@@ -18,4 +18,10 @@
 .total-container {
   display: flex;
   justify-content: center;
+  /* background-image: url('../images/louis-hansel-342635-unsplash.jpg'); */
+  background-image: url('../images/javier-grixo-347764-unsplash.jpg');
+  /* background-image: url('../images/randy-fath-711941-unsplash.jpg'); */
+  background-size: 100%;
+  background-position: 50% 25%;
+
 }

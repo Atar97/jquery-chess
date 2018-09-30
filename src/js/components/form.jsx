@@ -9,8 +9,8 @@ class Form extends React.Component {
 
   render() {
     return (
-      <div className="modal-form-container">
-        <form className="modal-form"  onSubmit={this.submit.bind(this)}>
+      <div className='modal-form-container'>
+        <form className='modal-form'  onSubmit={this.submit.bind(this)}>
 
           <label htmlFor='player1'>Player1 Name: </label>
           <input className='text' onChange={this.storeText}

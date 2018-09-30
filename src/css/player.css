@@ -1,15 +1,16 @@
 .player {
   display: flex;
   flex-direction: column;
-  margin: 100px;
+  margin-left: 200px;
+  margin-top: 50px;
+
   padding: 3px;
   width: 200px;
-  height: 400px;
+  height: 595px;
   background-color: #D3A461;
   align-items: center;
-  margin-top: 100px;
   border-radius: 6px;
-  box-shadow: 4px 4px 10px gray;
+  box-shadow: -1px 4px 5px #674600;
 }
 
 .player-header {
@@ -17,7 +18,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: flex-start;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   margin-top: 10px;
 }
 
@@ -36,7 +37,6 @@
   width: 100px;
   flex-direction: column;
   align-items: center;
-  margin: 30px;
   padding: 30px;
 }
 
@@ -56,6 +56,7 @@
   border-radius: 5px;
   box-shadow: 2px 2px 3px black;
   margin-top: 5px;
+  min-height: 50px;
 }
 
 .button:active {
