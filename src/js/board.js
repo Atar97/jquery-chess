@@ -66,6 +66,10 @@ class Board {
     return false;
   }
 
+  empty(pos) {
+    return !(this.getPiece(pos).color);
+  }
+
 }
 
 export default Board;
