@@ -14,7 +14,8 @@ class Timer extends React.Component {
   render() {
     return <div className='timer'>
       <h2>{this.toStr.bind(this)()}</h2>
-      <button onClick={this.change.bind(this)}>
+      <button className='button'
+        onClick={this.change.bind(this)}>
         {this.state.buttonText}
       </button>
     </div>;

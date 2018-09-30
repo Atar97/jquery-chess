@@ -48,13 +48,18 @@
   font-size: 30px;
 }
 
-.timer button {
+.button {
   width: 100%;
   background-color: #E2D6A7;
   padding: 10px;
   font-size: 20px;
   border-radius: 5px;
   box-shadow: 2px 2px 3px black;
+  margin-top: 5px;
+}
+
+.button:active {
+  box-shadow: none;
 }
 
 .in-progress {
