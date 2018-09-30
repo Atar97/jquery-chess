@@ -9,7 +9,7 @@ class Slideable extends Piece {
   }
 
   allMoves() {
-    const dirs = this.moveDirs();
+    const dirs = this.moveDirs;
     const result = [];
     const that = this;
     dirs.forEach(dir => {
@@ -21,10 +21,10 @@ class Slideable extends Piece {
     });
     return result;
   }
-
-  moveDirs() {
-    return this.DIAGONAL.concat(this.ORTHOGONAL);
-  }
+  //
+  // moveDirs() {
+  //   return this.DIAGONAL.concat(this.ORTHOGONAL);
+  // }
 
 }
 

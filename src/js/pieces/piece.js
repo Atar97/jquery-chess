@@ -29,6 +29,30 @@ class Piece {
     }
   }
 
+  validMove(pos) {
+    const moves = this.allMoves();
+    for (let i = 0; i < moves.length; i++) {
+      if (moves[i].oneLevelEqual(pos)) return true;
+    }
+    return false;
+  }
+
 }
+
+//checks array equality at the top level
+//doesn't work for nested arrays - could improve functionality with
+//a recursive algorithm
+Array.prototype.oneLevelEqual = function(otherArray) {
+  if (this.length === otherArray.length) {
+    for (let i = 0; i < this.length; i++) {
+      if (this[i] != otherArray[i]) {
+        return false;
+      }
+    }
+  } else {
+    return false;
+  }
+  return true;
+};
 
 export default Piece;
