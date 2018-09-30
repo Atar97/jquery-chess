@@ -22,6 +22,7 @@ class View {
     const $square = $(`<div class='square'></div>`);
     const pos = [Math.floor(number / 8), number % 8];
     $square.data('pos', pos);
+    $square.attr('position', pos.toString());
     if (this.whiteSquare(pos)) {
       $square.addClass('white-square');
     } else {
@@ -32,15 +33,23 @@ class View {
 
   bindSquares() {
     const $squares = $('.square');
-    let boundMove = this.move.bind(this);
+    const that = this;
     $squares.each(function(index) {
       const $square = $(this);
-      $square.on('click', e => {
-        const $clickedSq = $(e.currentTarget);
-        $clickedSq.addClass('selected');
-        boundMove($clickedSq);
-      });
+      $square.on('click', that.onClick.bind(that));
     });
+  }
+
+  onClick(event) {
+    const $clickedSq = $(event.currentTarget);
+    $clickedSq.addClass('selected');
+    const piece = this.game.getPiece($clickedSq.data('pos'));
+    const validSquares = piece.allMoves().map((pos) => {
+      return this.getSquareByPos(pos);
+    });
+    debugger;
+    validSquares.forEach((el) => el.addClass('valid'));
+    this.move($clickedSq);
   }
 
   // this will be called between each move
@@ -57,10 +66,11 @@ class View {
   }
 
   move($clickedSq) {
-    if (this.firstClick) {  
+    if (this.firstClick) {
       this.game.movePiece(this.firstClick, $clickedSq.data('pos'));
       this.firstClick = null;
       $('.selected').removeClass('selected');
+      $('.valid').removeClass('valid');
       this.render();
       return true;
     } else {
@@ -80,6 +90,11 @@ class View {
       }
     }
     return false;
+  }
+
+  getSquareByPos(pos) {
+    const strPos = pos.toString();
+    return $(`.square[position='${strPos}']`);
   }
 
 }

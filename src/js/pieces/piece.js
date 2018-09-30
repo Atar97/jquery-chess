@@ -37,6 +37,9 @@ class Piece {
     return false;
   }
 
+  //stub method to be implemented for each class
+  allMoves() {return [];}
+
 }
 
 //checks array equality at the top level
