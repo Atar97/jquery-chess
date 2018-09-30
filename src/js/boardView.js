@@ -2,11 +2,12 @@ import View from './view';
 import Game from './game';
 import Board from './board';
 import Piece from './pieces/piece';
+import King from './pieces/king';
+import Knight from './pieces/knight';
 
 const renderView = () => {
   const $mainContainer = $('.board-container');
   const game = new Game();
-  window.rook = new Rook('black', [5,0], game.board);
   const view = new View(game, $mainContainer);
 };
 

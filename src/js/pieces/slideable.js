@@ -21,10 +21,6 @@ class Slideable extends Piece {
     });
     return result;
   }
-  //
-  // moveDirs() {
-  //   return this.DIAGONAL.concat(this.ORTHOGONAL);
-  // }
 
 }
 

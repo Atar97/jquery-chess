@@ -1,9 +1,12 @@
-import Piece from './piece'
-class Knight extends Piece {
-  constructor(color, pos) {
-    super(color, pos);
-    this.sym = 'N';
+import Stepable from './stepable';
+class Knight extends Stepable {
+  constructor(color, pos, board) {
+    super(color, pos, board);
     this.str = '&#9822;';
+    this.steps = [
+      [1,2], [2,1], [-1, 2], [-2, 1],
+      [-1,-2], [-2,-1], [1, -2], [2, -1]
+              ];
   }
 }
 
