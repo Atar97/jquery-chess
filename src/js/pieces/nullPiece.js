@@ -1,11 +1,11 @@
-const Piece = require('./piece.js');
+import Piece from './piece';
 
 class NullPiece extends Piece {
   constructor() {
-    super();
+    super(null);
     this.sym = ' ';
     this.str = ' ';
   }
 }
 
-module.exports = NullPiece;
+export default NullPiece;

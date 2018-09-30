@@ -1,4 +1,4 @@
 node_modules/
 dist/boardView.js
-bundle.js
-bundle.js.map
+dist/bundle.js
+dist/bundle.js.map

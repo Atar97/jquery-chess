@@ -19,7 +19,7 @@ class View {
   }
 
   makeSquare(number) {
-    const $square = $("<div class='square'></div>");
+    const $square = $(`<div class='square'></div>`);
     const pos = [Math.floor(number / 8), number % 8];
     $square.data('pos', pos);
     if (this.whiteSquare(pos)) {
@@ -85,4 +85,4 @@ class View {
 
 }
 
-module.exports = View;
+export default View;

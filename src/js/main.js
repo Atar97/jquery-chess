@@ -1,5 +1,5 @@
-const View = require('./view.js');
-const Game = require('./game.js');
+import View from './view';
+import Game from './game';
 
 const renderView = () => {
   const $mainContainer = $('.board-container');

@@ -1,11 +1,10 @@
-const Piece = require('./piece.js');
+import Slideable from './slideable';
 
-class Queen extends Piece {
+class Queen extends Slideable {
   constructor(color, pos) {
     super(color, pos);
-    this.sym = 'R';
     this.str = '&#9819;';
   }
 }
 
-module.exports = Queen;
+export default Queen;

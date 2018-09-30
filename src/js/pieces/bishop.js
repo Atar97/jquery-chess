@@ -1,11 +1,10 @@
-const Piece = require('./piece.js');
+import Slideable from './slideable';
 
-class Bishop extends Piece {
+class Bishop extends Slideable {
   constructor(color, pos) {
     super(color, pos);
-    this.sym = 'B';
     this.str = '&#9821;';
   }
 }
 
-module.exports = Bishop;
+export default Bishop;

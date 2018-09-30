@@ -1,10 +1,10 @@
-const Bishop =  require('./pieces/bishop.js');
-const King = require('./pieces/king.js');
-const Knight = require('./pieces/knight.js');
-const Pawn = require('./pieces/pawn.js');
-const Queen = require('./pieces/queen.js');
-const Rook = require('./pieces/Rook.js');
-const NullPiece = require('./pieces/nullPiece.js');
+import Bishop from './pieces/bishop';
+import King from './pieces/king';
+import Knight from './pieces/knight';
+import Pawn from './pieces/pawn';
+import Queen from './pieces/queen';
+import Rook from './pieces/Rook';
+import NullPiece from './pieces/nullPiece';
 
 class Board {
   constructor() {
@@ -20,10 +20,10 @@ class Board {
 
   buildBoard() {
     for (let i = 0; i < 8; i++) {
-      this.board[0][i] = new this.POWERPIECES[i]('white', [0,i]);
-      this.board[1][i] = new Pawn('white', [0,i]);
-      this.board[6][i] = new Pawn('black', [0,i]);
-      this.board[7][i] = new this.POWERPIECES[i]('black', [0,i]);
+      this.board[0][i] = new this.POWERPIECES[i]('white', [0,i], this);
+      this.board[1][i] = new Pawn('white', [0,i], this);
+      this.board[6][i] = new Pawn('black', [0,i], this);
+      this.board[7][i] = new this.POWERPIECES[i]('black', [0,i], this);
       for (let k = 2; k < 6; k++) {
         this.board[k][i] = this.sentinal;
       }
@@ -46,4 +46,4 @@ class Board {
   }
 }
 
-module.exports = Board;
+export default Board;
