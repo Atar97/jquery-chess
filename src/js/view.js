@@ -47,7 +47,6 @@ class View {
     const validSquares = piece.allMoves().map((pos) => {
       return this.getSquareByPos(pos);
     });
-    debugger;
     validSquares.forEach((el) => el.addClass('valid'));
     this.move($clickedSq);
   }

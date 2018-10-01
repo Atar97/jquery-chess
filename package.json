@@ -16,8 +16,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack --watch --mode=development",
-    "test_build": "webpack ./src/js/main.js -o ./dist/test.js --mode=development --watch"
+    "webpack": "webpack --watch --mode=development"
   },
   "keywords": [],
   "author": "",

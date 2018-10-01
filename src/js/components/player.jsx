@@ -5,7 +5,6 @@ import Timer from './timer';
 class Player extends React.Component {
   constructor(props) {
     super(props);
-
   }
 
   render() {

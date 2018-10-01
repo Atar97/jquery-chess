@@ -70,6 +70,45 @@ class Board {
     return !(this.getPiece(pos).color);
   }
 
+  check(color) {
+    const kingPos = this.findKing(color).pos;
+    const pieces = this.findPieces(Board.otherColor(color));
+    let result = false;
+    pieces.forEach((piece) => {
+      if (piece.validMove(kingPos)) {
+        result = true;
+      }
+    });
+    return result;
+  }
+
+  findKing(color) {
+    const pieces = this.findPieces(color);
+    let king = false;
+    pieces.forEach((piece) => {
+      if (piece instanceof King) {
+        king = piece;}
+    });
+    return king;
+  }
+
+  findPieces(color) {
+    let result = [];
+    this.board.forEach((row) => {
+      row.forEach((el) =>  {
+        if (el.color === color) result.push(el);
+      });
+    });
+    return result;
+  }
+
+  static otherColor(color) {
+    if (color === 'white') {
+      return 'black';
+    }
+    return 'white';
+  }
+
 }
 
 export default Board;
